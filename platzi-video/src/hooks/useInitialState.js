@@ -1,15 +1,29 @@
 import axios from "axios";
+import { useState, useEffect } from 'react';
 
 //get all products
-export const coursesAll =async()=>{
+const useInitialState =(URL)=>{
 
-  const resp = await axios({
-    method: "GET",
-    url: "https://raw.githubusercontent.com/xsrpm/frontend-nodejs/master/platzi-video/initialState.json",
-    headers: {
-      'Content-Type': 'application/json', 
+  const [ videos, setVideos ] = useState([]);
+
+  useEffect(() => {
+    const getData = async()=>{
+      const resp = await axios({
+        method: "GET",
+        url: URL,
+        headers: {
+          'Content-Type': 'application/json', 
+        }
+      })
+      if(resp){
+        setVideos(resp.data.initialState)
+      }
+      
     }
-  })
-  return console.log(resp, 'resp')
+    getData()
+     
+    },[])
+  return videos
 
 }
+export default useInitialState;
