@@ -3,22 +3,45 @@ import PropTypes from 'prop-types';
 import '../assets/styles/components/CarouselItem.scss';
 import playIcon from '../assets/static/play-icon.png';
 import plusIcon from '../assets/static/plus-icon.png';
+import lessIcon from '../assets/static/less-icon.png';
+import { connect } from 'react-redux'
+import { setFavorite, removeFavorite } from './../actions/index'
 
-const CarouselItem = ({ cover, title, year, contentRating, duration }) => (
-  <div className="carousel-item">
+const CarouselItem = (props) => {
+
+  const { id, cover, title, year, contentRating, duration,isList } = props
+  const handleSetFavorite = ()=>{
+    props.setFavorite({
+      id, cover, title, year, contentRating, duration 
+    })
+  }
+
+  const handleRemoveFavorite = ()=>{
+    props.removeFavorite({
+      id, cover, title, year, contentRating, duration 
+    })
+  }
+
+  return(
+  < div className = "carousel-item" >
   <img className="carousel-item__img" src={cover} alt={title}  />
   <div className="carousel-item__details">
     <div>
       <img className="carousel-item__details--img" src={playIcon} alt="Play Icon" />
-      <img className="carousel-item__details--img" src={plusIcon} alt="Plus Icon" />
+      {isList? <img className="carousel-item__details--img" 
+      onClick={handleRemoveFavorite} src={lessIcon} alt="Minor Icon" />: <img className="carousel-item__details--img" 
+      onClick={handleSetFavorite} src={plusIcon} alt="Plus Icon" />}
+     
+      
     </div>
     <p className="carousel-item__details--title">{title}</p>
     <p className="carousel-item__details--subtitle">
       {`${year} ${contentRating} ${duration}`}
     </p>
   </div>
-</div>
+</div >
 );
+  }
 
 CarouselItem.propTypes = {
   cover: PropTypes.string,
@@ -28,4 +51,9 @@ CarouselItem.propTypes = {
   duration: PropTypes.number,
 }
 
-export default CarouselItem;
+const mapDispatchToProps = {
+  setFavorite,
+  removeFavorite
+}
+
+export default connect(null, mapDispatchToProps)(CarouselItem);
