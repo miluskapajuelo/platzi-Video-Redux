@@ -2,20 +2,24 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './containers/Home'
 import Login from './containers/Login';
-
+import Register from './containers/Register';
+import NotFound from './containers/NotFound';
+import Layout from './components/Layout';
 
 
 function App() {
   return (
 
-    <div className="App">
       <Router>
+        <Layout>
         <Routes>
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/login" element={<Login/>} />
+          <Route exact path="/register" element={<Register/>} />
+          <Route element={<NotFound/>}/>
         </Routes>
+        </Layout>
       </Router>
-    </div>
   );
 }
 

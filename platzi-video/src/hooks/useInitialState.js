@@ -22,7 +22,7 @@ const useInitialState =(URL)=>{
     }
     getData()
      
-    },[])
+    },[URL])
   return videos
 
 }
