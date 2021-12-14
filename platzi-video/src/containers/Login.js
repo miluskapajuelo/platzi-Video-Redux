@@ -3,9 +3,12 @@ import './../assets/styles/components/Login.scss'
 import googleIcon from './../assets/static/google-icon.png'
 import twitterIcon from './../assets/static/twitter-icon.png'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {loginRequest} from './../actions'
+import { useNavigate } from "react-router-dom";
 
-function Login() {
-
+function Login(props) {
+    const navigate = useNavigate();
     const [form, setValues] = useState({
         email: ''
     })
@@ -19,7 +22,8 @@ function Login() {
 
     const handleSubmit= e =>{
         e.preventDefault()
-        console.log(form);
+        props.loginRequest(form)
+        navigate('/')
     }
 
     return (
@@ -59,13 +63,11 @@ function Login() {
             </section>
             
         </section>
-        /*  
-             
-                 
-                 
-                 
-*/
     )
 }
 
-export default Login
+const mapDispatchToProps = {
+    loginRequest
+}
+
+export default connect(null,mapDispatchToProps )(Login)
