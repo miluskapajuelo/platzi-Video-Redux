@@ -2,11 +2,12 @@ import md5 from 'md5';
 
 
 function gravatar(email) {
-    const base = 'http://gravatar.com/avatar'
+    const base = 'http://gravatar.com/avatar/'
+    const formattedEmail = (email).trim().toLowerCase()
+    const hash = md5(formattedEmail, {encoding: 'binary'})
     
-    return (
-        <div>
-            
-        </div>
-    )
+    return `${base}${hash}`
+
 }
+
+export default gravatar
