@@ -14,3 +14,13 @@ export const loginRequest = payload => ({
     payload
 })
 
+export const logOutRequest = payload => ({
+    type: 'LOGOUT_REQUEST',
+    payload
+})
+
+export const registerRequest = payload => ({
+    type: 'REGISTER_REQUEST',
+    payload
+})
+
