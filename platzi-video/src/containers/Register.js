@@ -2,8 +2,11 @@ import React, {useState} from 'react'
 import './../assets/styles/components/Register.scss'
 import {Link} from 'react-router-dom'
 import {registerRequest} from './../actions'
+import {connect} from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
-function Register() {
+function Register(props) {
+    const navigate = useNavigate();
     const [form, setValues]= useState({
         name: '',
         email:'',
@@ -19,7 +22,9 @@ function Register() {
 
     const handleSubmit =event=>{
         event.preventDefault()
-        console.log(form)
+        props.registerRequest(form)
+        navigate('/login')
+
     }
     return (
         <section className="register">
@@ -57,4 +62,8 @@ function Register() {
     )
 }
 
-export default Register
+const mapDispatchToProps ={
+    registerRequest
+}
+
+export default connect(null,mapDispatchToProps )(Register)
