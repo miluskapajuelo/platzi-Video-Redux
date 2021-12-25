@@ -1,3 +1,10 @@
+/**
+ * reducer used to manage state of all app
+ * @param {*} state it is the initialState obtained of './utils/data'
+ * @param {*} action.payload it is the value pass from e.g. mapDispatchToProps = { getVideoSource}
+ * 
+ * @returns 
+ */
 const reducer = (state, action) => {
     switch (action.type) {
         case 'SET_FAVORITE':
@@ -39,6 +46,16 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: action.payload
+            };
+            break;
+        case 'GET_VIDEO_SOURCE':
+
+            let video = state.trends.find((element) => element.id === Number(action.payload)) || state.originals.find((element) => element.id === Number(action.payload))||[]
+ 
+
+            return {
+                ...state,
+                playing: video
             };
             break;
         default:

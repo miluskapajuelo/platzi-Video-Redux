@@ -4,6 +4,7 @@ import Home from './containers/Home'
 import Login from './containers/Login';
 import Register from './containers/Register';
 import NotFound from './containers/NotFound';
+import Players from './containers/Players';
 import Layout from './components/Layout';
 
 
@@ -16,8 +17,8 @@ function App() {
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/login" element={<Login/>} />
           <Route exact path="/register" element={<Register/>} />
-          <Route exact path="/player/:id" element={<Register/>} /> {/* corregir */}
-          <Route element={<NotFound/>}/>
+          <Route  path="/player/:id" element={<Players/>} /> 
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
         </Layout>
       </Router>
